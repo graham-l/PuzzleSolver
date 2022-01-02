@@ -16,6 +16,7 @@ def blockPerms(builtChain: list, spareBlocks: list):
     if len(spareBlocks) == 0:
         print('I HAVE FOUND A SOLUTION')
         print(yaml.dump(builtChain))
+        quit()
         return True
     elif len(builtChain) == 0:
         for b in spareBlocks:
@@ -38,7 +39,7 @@ def blockPerms(builtChain: list, spareBlocks: list):
                     newBlock = Block([newFace], b.blockNumber)
                     testChain = builtChain.copy()
                     testChain.append(newBlock)
-                    print(yaml.dump(testChain))
+                    #print(yaml.dump(testChain))
                     thisOutcome: bool = blockPerms(testChain, spares)
 
                     if thisOutcome:
