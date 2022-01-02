@@ -20,7 +20,6 @@ def blockPerms(builtChain: list, spareBlocks: list):
     elif len(builtChain) == 0:
         for b in spareBlocks:
             for f in b.faceList:
-                print(yaml.dump(f))
                 newFace = Face([f.numList[0], f.numList[1]])
                 newBlock = Block([newFace], b.blockNumber)
                 testChain = builtChain.copy()
@@ -41,10 +40,10 @@ def blockPerms(builtChain: list, spareBlocks: list):
                     return blockPerms(testChain, spares)
     else:
         lenny = len(builtChain)
-        lastInChain = builtChain[len(builtChain) - 1]
-        print(yaml.dump(lastInChain))
-        print(yaml.dump(lastInChain.faceList[0].numList))
-        matchDigit = lastInChain.faceList[1]
+        lastInChain = builtChain[len(builtChain) - 1][0]
+        #print(yaml.dump(lastInChain))
+        #print(yaml.dump(lastInChain.faceList[0].numList))
+        matchDigit = lastInChain.faceList[0].numList[1]
 
         for b in spareBlocks:
             spares = []
@@ -60,7 +59,9 @@ def blockPerms(builtChain: list, spareBlocks: list):
                     newChain = builtChain.copy()
                     newChain.append(newBlock)
 
-                    if not blockPerms(newChain, spares):
+                    outcome: bool = blockPerms(newChain, spares)
+
+                    if not outcome:
                         newBlock = Block([b[1], b[0]])
 
                         if newBlock.faceList[0] != matchDigit:
