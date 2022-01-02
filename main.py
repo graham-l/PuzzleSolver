@@ -60,12 +60,12 @@ def blockPerms(builtChain: list, spareBlocks: list):
                 newFace = Face([f.numList[1], f.numList[0]])
                 newBlock = Block([newFace], b.blockNumber)
 
-                if newBlock.faceList[0] != matchDigit:
-                    temp: int = newBlock.faceList[0]
-                    newBlock.faceList[0] = newBlock.faceList[1]
-                    newBlock.faceList[1] = temp
+                if newBlock.faceList[0].numList[0] != matchDigit:
+                    temp: int = newBlock.faceList[0].numList[0]
+                    newBlock.faceList[0].numList[0] = newBlock.faceList[0].numList[1]
+                    newBlock.faceList[0].numList[1] = temp
 
-                if newBlock.faceList[0] == matchDigit:
+                if newBlock.faceList[0].numList[0] == matchDigit:
                     newChain = builtChain.copy()
                     newChain.append(newBlock)
 
